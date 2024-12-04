@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useLocation } from "react-router";
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router';
 import logo from "../assets/logo.png";
 import { FaWhatsapp, FaBoxOpen } from "react-icons/fa";
 
@@ -30,17 +30,11 @@ function Footer() {
 
       <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm sm:text-md mt-2 sm:mt-0">
         <div className="font-bold text-lg">Contatos:</div>
-        <a target="_blank" href="mailto:contato.maxlimp@gmail.com">
-          Email
-        </a>
+        <div>Email</div>
         <div className="hidden sm:block">|</div>
-        <a target="_blank" href="tel:+5521998355672">
-          Telefone
-        </a>
+        <div>Telefone</div>
         <div className="hidden sm:block">|</div>
-        <a target="_blank" href="https://wa.me/5521998355672">
-          Whatsapp
-        </a>
+        <div>Whatsapp</div>
       </div>
 
       <div className="flex flex-col items-center gap-2 sm:gap-4 text-sm sm:text-md mt-4 sm:mt-0">

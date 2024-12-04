@@ -7,19 +7,16 @@ import ConfirmEmailCode from "./pages/ConfirmEmailCode";
 import AboutUs from "./pages/AboutUs";
 import Config from "./pages/Config";
 import Cart from "./pages/Cart";
-import NotFound from "./components/NotFound";
 
 import ProductDetails from "./products/ProductDetails";
 import Address from "./pages/Address";
 import { AdddresssProvider } from "./contexts/AddressProvider";
 import { Admin } from "./admin/Admin";
 import Orders from "./pages/Orders";
+import NotFound from "./components/NotFound";
 
 const router = createBrowserRouter([
-  {
-    path: "*",
-    element: <NotFound />,
-  },
+  { path: "*", element: <NotFound /> },
   {
     path: "/",
     element: <Home />,
@@ -52,17 +49,10 @@ const router = createBrowserRouter([
     path: "carrinho/",
     element: <Cart />,
   },
-  {
-    path: "compra/",
-    element: <Address />,
-  },
+
   {
     path: "produto/:id",
     element: <ProductDetails />,
-  },
-  {
-    path: "pedidos/",
-    element: <Orders />,
   },
 ]);
 

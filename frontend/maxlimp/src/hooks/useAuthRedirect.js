@@ -4,11 +4,7 @@ import useSWR from "swr";
 import { getFetcher } from "../services/data.js";
 import { useAuth } from "../contexts/AuthProvider.jsx";
 
-function useAuthRedirect(
-  successPath = "/",
-  notAuthPath = "/registro",
-  canNavigate = true
-) {
+function useAuthRedirect(successPath = "/", notAuthPath = "/registro") {
   // const userData = {
   //   user: {
   //     name: "david balzarini",
@@ -34,13 +30,13 @@ function useAuthRedirect(
     if (isLoading) return;
     switch (data?.type) {
       case "authenticated":
-        if (canNavigate) navigate(successPath);
+        navigate(successPath);
         break;
       case "notAuthenticated":
-        if (canNavigate) navigate(notAuthPath);
+        navigate(notAuthPath);
         break;
       case "authenticating":
-        if (canNavigate) navigate("/validacao");
+        navigate("/validacao");
         break;
       default:
         break;

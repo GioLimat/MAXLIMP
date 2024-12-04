@@ -12,15 +12,19 @@ import { useAuth } from "../contexts/AuthProvider";
 import { useCart } from "../contexts/CartContext";
 import { getFetcher } from "../services/data";
 import CartIcon from "./CartIcon";
-import useAuthRedirect from "../hooks/useAuthRedirect";
 
 function HeaderHome({ showSearch = true }) {
-  useAuthRedirect("/", "/", false);
+  const { data } = useSWR("auth/check-auth/", getFetcher);
+  const { user, setUser } = useAuth();
   const { cart } = useCart();
 
-  const { user } = useAuth();
+  const memoUser = useMemo(() => data?.user, [data?.user]);
 
-  if (!user) return null;
+  useEffect(() => {
+    if (!user) {
+      setUser(memoUser);
+    }
+  }, [memoUser]);
 
   return (
     <header className="px-4 md:px-12 bg-indigo-50 flex flex-col items-start justify-center">

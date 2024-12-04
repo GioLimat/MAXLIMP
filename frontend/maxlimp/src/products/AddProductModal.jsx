@@ -13,12 +13,13 @@ const AddProductModal = ({ open, onClose, onSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { trigger } = useSWRMutation("admin/add-product/", postFetcher);
+  const { trigger: add } = useSWRMutation("admin/add-product/", postFetcher);
+
   const handleAddProduct = async () => {
     setLoading(true);
     setError(null);
     try {
-      await trigger({
+      await add({
         product: {
           name: productName,
           price: productPrice,
@@ -28,6 +29,7 @@ const AddProductModal = ({ open, onClose, onSuccess }) => {
           category: productCategory,
         },
       });
+
       setProductName("");
       setProductPrice("");
       setProductImage("");

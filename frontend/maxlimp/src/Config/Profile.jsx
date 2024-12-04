@@ -59,7 +59,7 @@ function Profile() {
   if (isLoading) return <p>Carregando perfil...</p>;
 
   return (
-    <div className="grid grid-rows-[1fr_auto] grid-cols-1 md:grid-cols-[1fr_auto] md:grid-rows-1">
+    <div className="grid grid-cols-[1fr_auto]">
       <div>
         <div className="flex flex-col gap-6">
           {error && <p className="text-sm text-red-500">{error}</p>}

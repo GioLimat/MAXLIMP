@@ -17,6 +17,8 @@ def get_products():
             "price": product.price,
             "image": product.image,
             "category": product.category,
+            "quantity": product.quantity,
+            "description": product.description
         })
 
 
@@ -56,15 +58,20 @@ def fuzzy_search_products(query, categories, min, max, threshold=50):
 def user_ordered(user_id, product_id):
     if not user_id or not product_id:
         return []
-    orders = Order.objects.filter(user_id=user_id, product_id=product_id)
+    
 
-    orders_arr = [{"id": item.id} for item in orders]
-
+    orders = QuantityOfProducts.objects.filter(
+        order_id__user_id=user_id, 
+        product_id=product_id       )
+    
+    orders_arr = [{"id": item.order_id.id} for item in orders]
     return orders_arr
 
 def can_review(user_id, product_id):
-    return Order.objects.filter(user_id=user_id, product_id=product_id).exists()
-
+    return QuantityOfProducts.objects.filter(
+        order_id__user_id=user_id,
+        product_id=product_id
+    ).exists()
 
 def get_especific_product(user_id, product_id):
     product = Product.objects.filter(pk=product_id).first()
@@ -132,7 +139,7 @@ def get_cart(user_id):
         "name": item.product_id.name,
         "price": item.product_id.price,
         "image": item.product_id.image,
-        "QuantityOfProducts": item.quantity
+        "quantity": item.quantity
         } for item in cart
     ]
 

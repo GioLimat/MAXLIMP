@@ -4,7 +4,7 @@ import HeaderHome from "./HeaderHome";
 function NotFound() {
   return (
     <>
-      <HeaderHome showSearch={false} />{" "}
+      <HeaderHome showSearch={false} />
       <div className="flex flex-col gap-4 items-center justify-center h-screen">
         <h2 className="text-2xl font-semibold">Página não encontrada!</h2>
         <Link to="/">

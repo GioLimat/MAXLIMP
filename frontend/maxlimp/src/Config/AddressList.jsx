@@ -27,7 +27,7 @@ function AddressList({ addresses, isLoading, mutate, showDelete = true }) {
                   }
             }
             key={addr.id}
-            className={`py-2 text-stone-800 capitalize flex-col md:flex-row flex grow-0  items-center justify-between ${
+            className={`py-2 text-stone-800 capitalize flex grow-0  items-center justify-between ${
               !showDelete ? "cursor-pointer" : "cursor-auto"
             } ${!showDelete && active?.id === addr.id ? "bg-indigo-100 " : ""}`}
           >
@@ -35,7 +35,7 @@ function AddressList({ addresses, isLoading, mutate, showDelete = true }) {
               <h4 className="text-xl tracking-tight font-light">
                 {addr.district}
               </h4>{" "}
-              <div className="flex md:flex-row flex-col gap-4">
+              <div className="flex gap-4">
                 <span className="text-md">{addr.address}</span>
                 <span className=" text-sm">{addr.complement}</span>{" "}
               </div>

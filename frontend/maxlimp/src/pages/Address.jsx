@@ -37,7 +37,7 @@ function Address({ total, selectedItems }) {
         `
     Nome: ${i.name}\n
     Quantidade: ${i.quantity}x
-    Preço: R$${(i.quantity * i.price).toFixed(2)}
+    Preço: ${i.quantity * i.price}
     ` +
         "\n"
       );

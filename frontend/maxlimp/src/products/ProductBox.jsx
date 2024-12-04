@@ -15,15 +15,18 @@ function ProductBox({ product }) {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
-  const { trigger } = useSWRMutation("admin/delete-product/", postFetcher);
-
   const handleSaibaMais = () => {
     navigate(`/produto/${product.id}`);
   };
 
+  const { trigger: deleteProduct } = useSWRMutation(
+    `admin/delete-product/`,
+    postFetcher
+  );
+
   const handleDeleteProduct = async () => {
     try {
-      await trigger({
+      await deleteProduct({
         product: {
           id: product.id,
         },
@@ -65,7 +68,7 @@ function ProductBox({ product }) {
         R${product.price}
       </p>
       <div>
-        {user?.type === "admin" ? (
+        {user.type === "admin" ? (
           <div className="mt-4 flex flex-col gap-4">
             <button
               variant="contained"

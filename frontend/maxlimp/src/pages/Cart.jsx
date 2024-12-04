@@ -33,8 +33,6 @@ function Cart() {
     });
   };
 
-  console.log(cart);
-
   const total = selectedItems?.reduce((acc, el) => {
     const cartCorr = cart.find(
       (c) => el.toLowerCase() === c.name.toLowerCase()
@@ -96,7 +94,7 @@ function Cart() {
                       <input
                         type="number"
                         className="border rounded w-10 p-1"
-                        value={product?.quantity}
+                        value={product.quantity}
                         min="0"
                         onChange={(e) =>
                           handleQuantityChange(

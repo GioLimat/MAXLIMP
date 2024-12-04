@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Box, Modal, Button, TextField, Typography } from "@mui/material";
 import { patchFetcher, putFetcher } from "../services/data"; // Importa o patchFetcher
 import useSWRMutation from "swr/mutation";
@@ -13,27 +13,28 @@ const EditProductModal = ({ open, onClose, product, onSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { trigger } = useSWRMutation("admin/edit-product/", putFetcher);
+  const { trigger: edit } = useSWRMutation("admin/edit-product/", putFetcher);
+
+  const memoProduct = useMemo(() => product, [product]);
 
   useEffect(() => {
-    if (product) {
-      console.log(product);
-      setProductName(product.name);
-      setProductPrice(product.price);
-      setProductImage(product.image);
-      setProductDescription(product.description);
-      setProductQuantity(product.quantity);
-      setProductCategory(product.category);
+    if (memoProduct) {
+      setProductName(memoProduct.name);
+      setProductPrice(memoProduct.price);
+      setProductImage(memoProduct.image);
+      setProductDescription(memoProduct.description);
+      setProductQuantity(memoProduct.quantity);
+      setProductCategory(memoProduct.category);
     }
-  }, [product]);
+  }, [memoProduct]);
 
   const handleEditProduct = async () => {
     setLoading(true);
     setError(null);
     try {
-      await trigger({
+      await edit({
         product: {
-          id: product.id,
+          id: memoProduct.id,
           name: productName,
           price: productPrice,
           description: productDescription,

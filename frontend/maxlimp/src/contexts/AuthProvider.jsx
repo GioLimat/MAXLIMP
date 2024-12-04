@@ -2,7 +2,6 @@ import { createContext, useContext, useReducer } from "react";
 
 const initialState = {
   user: null,
-  //user: null,
 };
 
 const authReducer = (state, action) => {

@@ -36,13 +36,7 @@ function SubHeaderHome({ user }) {
         <SubHeaderPage active={location === "sobre-nos/"} to="/sobre-nos">
           Sobre Nós
         </SubHeaderPage>
-        {/* {user?.type !== "admin" && user?.type && (
-          <>
-            <SubHeaderPage active={location === "pedidos/"} to="/pedidos">
-              Pedidos
-            </SubHeaderPage>
-          </>
-        )} */}
+
         <SubHeaderPage
           onClick={() => {
             cleanSearch();
@@ -52,11 +46,6 @@ function SubHeaderHome({ user }) {
         >
           Contatos
         </SubHeaderPage>
-        {/*    {user?.type == "admin" && (
-          <SubHeaderPage active={location === "admin/"} to="/admin">
-            Dashboard
-          </SubHeaderPage>
-        )} */}
       </Box>
     </div>
   );

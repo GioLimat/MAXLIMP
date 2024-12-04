@@ -31,7 +31,7 @@ function SearchInput() {
     getFetcher
   );
 
-  console.log(products);
+  console.log(focus);
 
   return (
     <form
@@ -75,11 +75,7 @@ function SearchInput() {
         />
       </SearchButton>
 
-      {focus || products?.length > 0 ? (
-        <SearchResults query={query.trim()} products={products} />
-      ) : (
-        ""
-      )}
+      {focus ? <SearchResults query={query.trim()} products={products} /> : ""}
     </form>
   );
 }
