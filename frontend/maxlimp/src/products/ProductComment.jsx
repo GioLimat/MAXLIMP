@@ -13,6 +13,7 @@ import { useAuth } from "../contexts/AuthProvider";
 
 import useSWRMutation from "swr/mutation";
 import DeleteRating from "./DeleteRating";
+import { FaUser } from "react-icons/fa";
 
 function ProductComments({ product, onAverageRatingUpdate }) {
   const [comments, setComments] = useState(product.ratings);
@@ -58,43 +59,39 @@ function ProductComments({ product, onAverageRatingUpdate }) {
 
   return (
     <Box mt={4}>
-      {product?.userOrdered && product?.canReview ? (
-        <Box
-          component="form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleCommentSubmit();
-          }}
-          sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 4 }}
+      <Box
+        component="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleCommentSubmit();
+        }}
+        sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 4 }}
+      >
+        <Typography variant="h6" gutterBottom>
+          Adicione seu comentário
+        </Typography>
+        <Rating
+          name="new-rating"
+          value={rating}
+          onChange={(event, newValue) => setRating(newValue)}
+        />
+        <TextField
+          variant="outlined"
+          fullWidth
+          multiline
+          rows={4}
+          placeholder="Digite seu comentário aqui..."
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          sx={{ mb: 2 }}
+        />
+        <button
+          className="w-full rounded-md px-6 py-2 bg-indigo-600 text-white transition-all duration-300 hover:bg-indigo-700 flex items-center justify-center gap-4 text-sm uppercase tracking-wide"
+          type="submit"
         >
-          <Typography variant="h6" gutterBottom>
-            Adicione seu comentário
-          </Typography>
-          <Rating
-            name="new-rating"
-            value={rating}
-            onChange={(event, newValue) => setRating(newValue)}
-          />
-          <TextField
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={4}
-            placeholder="Digite seu comentário aqui..."
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-          <button
-            className="w-full rounded-md px-6 py-2 bg-indigo-600 text-white transition-all duration-300 hover:bg-indigo-700 flex items-center justify-center gap-4 text-sm uppercase tracking-wide"
-            type="submit"
-          >
-            Enviar
-          </button>
-        </Box>
-      ) : (
-        ""
-      )}
+          Enviar
+        </button>
+      </Box>
 
       <Divider sx={{ my: 2 }} />
 
@@ -107,13 +104,21 @@ function ProductComments({ product, onAverageRatingUpdate }) {
           comments.map((comment, index) => (
             <Paper key={index} variant="outlined" sx={{ p: 2, mb: 2 }}>
               <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                <img
-                  src={comment.user?.avatar}
-                  alt="Avatar"
-                  width="40"
-                  height="40"
-                  style={{ borderRadius: "50%" }}
-                />
+                {comment?.user?.avatar === "default" ? (
+                  <FaUser
+                    style={{ borderRadius: "50%" }}
+                    className="fill-indigo-600 "
+                  />
+                ) : (
+                  <img
+                    src={comment.user?.avatar}
+                    alt="Avatar"
+                    width="40"
+                    height="40"
+                    style={{ borderRadius: "50%" }}
+                  />
+                )}
+
                 <Typography
                   className="capitalize"
                   variant="subtitle1"
@@ -135,7 +140,7 @@ function ProductComments({ product, onAverageRatingUpdate }) {
                 {comment.rating?.comment}
               </Typography>
               <Typography variant="caption" color="text.secondary">
-                Atualizado em:{" "}
+                Criado em:{" "}
                 {new Date(comment.rating?.updateAt).toLocaleDateString()}
               </Typography>
               {user?.id === comment.user?.id && (

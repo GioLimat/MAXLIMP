@@ -53,6 +53,8 @@ function ProductBox({ product }) {
     setDeleteModalOpen(false);
   };
 
+  console.log(user);
+
   return (
     <div className="rounded-md p-4 border-2 border-indigo-600">
       <img
@@ -68,7 +70,7 @@ function ProductBox({ product }) {
         R${product.price}
       </p>
       <div>
-        {user.type === "admin" ? (
+        {user?.type === "admin" && user ? (
           <div className="mt-4 flex flex-col gap-4">
             <button
               variant="contained"

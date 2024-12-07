@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, CircularProgress, Box, Pagination, Button } from "@mui/material";
 import { useAuth } from "../contexts/AuthProvider";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import AddProductModal from './AddProductModal';  // Assumindo que o modal está neste caminho
+import AddProductModal from "./AddProductModal"; // Assumindo que o modal está neste caminho
 
 function ProductsContainer() {
   const { user } = useAuth();
@@ -81,7 +81,7 @@ function ProductsContainer() {
 
   return (
     <>
-      {user.type === 'admin' && (
+      {user?.type === "admin" && (
         <div className="flex justify-center items-center h-full mb-8">
           <button
             className="w-[250px] rounded-md px-6 py-2 bg-indigo-600 text-white transition-all duration-300 hover:bg-indigo-700 flex items-center justify-center gap-4 text-sm uppercase tracking-wide"
@@ -90,7 +90,11 @@ function ProductsContainer() {
             <IoMdAddCircleOutline className="w-8 h-8 fill-slate-50" />
             Adicionar Produto
           </button>
-          <AddProductModal open={modalOpen} onClose={handleModalClose} onSuccess={handleAddProductSuccess} />
+          <AddProductModal
+            open={modalOpen}
+            onClose={handleModalClose}
+            onSuccess={handleAddProductSuccess}
+          />
         </div>
       )}
       <ProductsTitle>
@@ -112,7 +116,7 @@ function ProductsContainer() {
       </ProductsTitle>
       <div className={`gap-8 flex items-center justify-center`}>
         <Grid container spacing={2} justifyContent="center">
-          {displayableProducts.map((product) => (
+          {displayableProducts?.map((product) => (
             <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={product.name}>
               <ProductBox product={product} />
             </Grid>

@@ -61,9 +61,9 @@ def edit_product(data):
 
 
 def delete_product(data):
+    print(data["id"])
     product = Product.objects.get(id=data["id"])
     product.delete()
-    return product
 
 
 

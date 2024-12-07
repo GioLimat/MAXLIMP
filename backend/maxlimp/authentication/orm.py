@@ -93,7 +93,6 @@ def delete_user(email):
         user.delete()
     except Exception as e:
         raise ORMError(f"Erro ao deletar usuário: {str(e)}")
-    return user
 
 
 
@@ -133,12 +132,12 @@ def save_address(district, address, complement, user):
 
 def remove_address(id, user):
     try:
-        address = Address.objects.filter(id=id, user=user).first()
+        address = Address.objects.filter(pk=id, user=user).first()
 
         address.delete()
 
-    except:
-        pass
+    except Exception as e:
+        print(e)
 
 
 def get_addresses(user):

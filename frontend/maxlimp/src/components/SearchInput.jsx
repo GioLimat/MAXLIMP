@@ -75,7 +75,11 @@ function SearchInput() {
         />
       </SearchButton>
 
-      {focus ? <SearchResults query={query.trim()} products={products} /> : ""}
+      {products?.length ? (
+        <SearchResults query={query.trim()} products={products} />
+      ) : (
+        ""
+      )}
     </form>
   );
 }

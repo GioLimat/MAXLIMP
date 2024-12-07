@@ -368,6 +368,7 @@ class CheckAuthAPI(APIView):
             "email": user.email,
             "avatar": user.avatar,
             "phone": user.phone,
+            "type": user.type
         }
 
         return Response({"message": "Usuário autenticado com sucesso.", "user": user_obj, "type": "authenticated"}, status=status.HTTP_200_OK)

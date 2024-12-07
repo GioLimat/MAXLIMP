@@ -32,7 +32,7 @@ class UserToken(models.Model):
 
 
 class Address(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     address = models.CharField(max_length=500)
     complement = models.CharField(max_length=500)
     district = models.CharField(max_length=200)
